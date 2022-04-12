@@ -7,6 +7,3 @@
 
 <body>
     <h1>University</h1>
-</body>
-
-</html>
