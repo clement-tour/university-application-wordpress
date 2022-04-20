@@ -24,7 +24,10 @@ get_header();
             <div class="generic-content"><?php the_excerpt() ?></div>
             <p><a class="btn btn--blue" href="<?php the_permalink() ?>">Continue reading</a></p>
         </div>
-    <?php } ?>
+    <?php }
+
+    echo paginate_links()
+    ?>
 
 </div>
 
