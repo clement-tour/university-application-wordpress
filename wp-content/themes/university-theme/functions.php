@@ -26,6 +26,7 @@ function university_features()
 
 add_action('after_setup_theme', 'university_features');
 
+//Function to adjust the default URL queries of Wordpress
 function university_adjust_queries($query)
 {
     if (!is_admin() and is_post_type_archive('event') and $query->is_main_query()) {
@@ -44,6 +45,16 @@ function university_adjust_queries($query)
                 'type' => 'numeric'
             )
         ));
+    }
+
+    if (!is_admin() and is_post_type_archive('program') and $query->is_main_query()) {
+
+        $query->set(
+            'orderby',
+            'title',
+        );
+        $query->set('order', 'ASC');
+        $query->set('posts_per_page', -1);
     }
 }
 
