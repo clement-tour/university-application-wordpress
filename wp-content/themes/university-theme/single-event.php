@@ -21,6 +21,25 @@ while (have_posts()) {
         <div class="generic-content">
             <?php the_content() ?>
         </div>
+
+        <?php
+        $relatedPrograms = get_field('related_programs');
+        // TO PRINT A VARIABLE USE print_r :
+        // print_r($relatedPrograms)
+        if ($relatedPrograms) { ?>
+
+            <hr class="section-break">
+            <h2 class="headline headline--medium">Related Program(s)</h2>
+            <ul class="link-list min-list">
+                <?php
+                foreach ($relatedPrograms as $programs) { ?>
+                    <li><a href=" <?php echo get_the_permalink($programs) ?>"> <?php echo get_the_title($programs); ?></a></li>
+
+                <?php }   ?>
+            </ul>
+
+        <?php  }  ?>
+
     </div>
 
 <?php

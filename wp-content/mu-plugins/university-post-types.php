@@ -1,6 +1,6 @@
 <?php function university_post_types()
 {
-    //creation of event post type
+    //creation of program post type
     register_post_type('program', array(
         'supports' => array('title', 'editor'),
         'rewrite' => array('slug' => 'programs'),
