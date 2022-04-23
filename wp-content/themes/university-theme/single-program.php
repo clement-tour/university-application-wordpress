@@ -22,6 +22,38 @@ while (have_posts()) {
             <?php the_content() ?>
         </div>
         <?php
+
+        $relatedProfessors = new WP_Query(array(
+            'posts_per_page' => -1,
+            'post_type' => 'professor',
+            'orderby' => 'title',
+            'order' => 'ASC',
+            'meta_query' => array(
+
+                array(
+                    'key' => 'related_programs',
+                    'compare' => 'LIKE',
+                    'value' => '"' . get_the_ID() . '"',
+                )
+
+            )
+        ));
+
+        if ($relatedProfessors->have_posts()) {
+            echo '<hr class="section-break">';
+            echo ' <h2 class="headline headline--medium">' . get_the_title() . ' Professors</h2>';
+
+            while ($relatedProfessors->have_posts()) {
+                $relatedProfessors->the_post(); ?>
+                <li><a href="<?php the_permalink() ?>"><?php the_title() ?></a></li>
+
+            <?php
+            }
+        }
+
+        // It's necessary to reset the post data between 2 queries. Without this line the post data are linked to professor post type because of the previous query. To work, the next query need default post data of the page Biology so this function reset the post data to the default URL post data of Wordpress
+        wp_reset_postdata();
+
         $today = date('Ymd');
         $homepageEvents = new WP_Query(array(
             'posts_per_page' => 2,
